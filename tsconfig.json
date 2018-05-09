@@ -10,7 +10,9 @@
     "experimentalDecorators": true,
     "target": "es5",
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "node_modules/rxjs",
+      "node_modules/@clr"
     ],
     "lib": [
       "es2017",

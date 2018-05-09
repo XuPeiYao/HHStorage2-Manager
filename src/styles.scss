@@ -1,0 +1,24 @@
+@media(max-width: 605px) {
+  .phoneHidden {
+    /* 手機板隱藏主導覽列圖示顯示 */
+    display: none !important;
+  }
+  .phoneShow {
+    /* 手機板顯示子導覽列 */
+    display: initial !important;
+  }
+}
+
+.phoneShow {
+  /* 預設隱藏手機板子導覽列 */
+  display: none;
+  /* 橫向空間不足則使用Scroll */
+  overflow-y: scroll;
+}
+
+/* 第二層導覽列顏色 */
+
+.nav .nav-link.active.nav-level-2,
+.nav .nav-link:hover.nav-level-2 {
+  box-shadow: inset 0 -3px 0 #bb0011;
+}

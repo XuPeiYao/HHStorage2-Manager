@@ -1,0 +1,19 @@
+<clr-wizard #wizard [(clrWizardOpen)]="open" [clrWizardClosable]="false" [clrWizardSize]="'md'" (clrWizardOnFinish)="reset()">
+  <clr-wizard-title>HHStorage2 安裝</clr-wizard-title>
+
+  <clr-wizard-button type="previous">上一步</clr-wizard-button>
+  <clr-wizard-button type="next">下一步</clr-wizard-button>
+
+  <clr-wizard-page *ngFor="let page of pageArray;let i = index">
+    <ng-template clrPageTitle>{{page}}</ng-template>
+    <!-- mandatory -->
+
+    <ng-template clrPageButtons *ngIf="i === 1">
+      <clr-wizard-button type="previous">上一步</clr-wizard-button>
+      <clr-wizard-button type="next">開始安裝</clr-wizard-button>
+    </ng-template>
+    <ng-template clrPageButtons *ngIf="i === 2">
+      <clr-wizard-button type="finish">完成</clr-wizard-button>
+    </ng-template>
+  </clr-wizard-page>
+</clr-wizard>
