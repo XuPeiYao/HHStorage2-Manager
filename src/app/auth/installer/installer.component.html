@@ -1,0 +1,45 @@
+<clr-wizard #wizard [(clrWizardOpen)]="open" [clrWizardClosable]="false" [clrWizardSize]="'md'" [clrWizardDisableStepnav]="true"
+  (clrWizardOnFinish)="reset()">
+  <clr-wizard-title>HHStorage2 安裝</clr-wizard-title>
+
+  <clr-wizard-button type="previous">上一步</clr-wizard-button>
+  <clr-wizard-button type="next">下一步</clr-wizard-button>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>資料庫設定</ng-template>
+    <ng-template clrPageNavTitle>資料庫設定</ng-template>
+
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>管理員帳號設定</ng-template>
+    <ng-template clrPageNavTitle>管理員帳號設定</ng-template>
+
+    <ng-template clrPageButtons>
+      <clr-wizard-button type="previous">上一步</clr-wizard-button>
+      <clr-wizard-button type="next">開始安裝</clr-wizard-button>
+    </ng-template>
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>安裝程序</ng-template>
+    <ng-template clrPageNavTitle>安裝程序</ng-template>
+
+    <div class="progress loop">
+      <progress></progress>
+    </div>
+    系統正在安裝中，請耐心等候...
+
+    <ng-template clrPageButtons></ng-template>
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>安裝完成</ng-template>
+    <ng-template clrPageNavTitle>安裝完成</ng-template>
+    HHStorage2 已經安裝成功，點擊「完成」關閉安裝視窗。
+
+    <ng-template clrPageButtons>
+      <clr-wizard-button type="finish">完成</clr-wizard-button>
+    </ng-template>
+  </clr-wizard-page>
+</clr-wizard>

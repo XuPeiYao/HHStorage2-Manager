@@ -9,11 +9,15 @@ import { ClrWizard } from '@clr/angular';
 export class InstallerComponent implements OnInit {
   @ViewChild('wizard') wizard: ClrWizard;
   open = true;
-  pageArray: string[] = ['資料庫設定', '管理員帳號', '完成'];
 
+  currentIndex = 0;
   constructor() { }
 
   ngOnInit() {
+    this.wizard.currentPageChanged.subscribe(next => {
+      if (!this.wizard.currentPage || !this.wizard.pageCollection.pagesCount) { return; }
+      this.currentIndex = this.wizard.pageCollection.getPageIndex(this.wizard.currentPage);
+    });
   }
 
   // adding a reset here for sanity's sake
