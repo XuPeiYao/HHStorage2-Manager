@@ -124,10 +124,85 @@
   <clr-wizard-page>
     <ng-template clrPageTitle>管理員帳號設定</ng-template>
     <ng-template clrPageNavTitle>管理員帳號設定</ng-template>
+    <form #adminConfig="ngForm">
+      <section class="form-block">
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="adminName">名稱*: </label>
+          </div>
+          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+            <label for="adminName" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
+              [class.invalid]="adminNameInput.invalid && (adminNameInput.dirty || adminNameInput.touched)">
+              <input #adminNameInput="ngModel" required [(ngModel)]="model.adminName" type="text" id="adminName" name="adminName" placeholder="請輸入管理員名稱">
+              <span class="tooltip-content" clrPosition="left">
+                管理員名稱為必填項目
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="adminId">帳號*: </label>
+          </div>
+          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+            <label for="adminId" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
+              [class.invalid]="adminIdInput.invalid && (adminIdInput.dirty || adminIdInput.touched)">
+              <input #adminIdInput="ngModel" required [(ngModel)]="model.adminId" type="text" id="adminId" name="adminId" placeholder="請輸入管理員帳號">
+              <span class="tooltip-content" clrPosition="left">
+                管理員帳號為必填項目
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="adminPassword">密碼*: </label>
+          </div>
+          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+            <label for="adminPassword" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
+              [class.invalid]="adminPasswordInput.invalid && (adminPasswordInput.dirty || adminPasswordInput.touched)">
+              <input #adminPasswordInput="ngModel" required [(ngModel)]="model.adminPassword" type="password" id="adminPassword" name="adminPassword"
+                placeholder="請輸入管理員密碼">
+              <span class="tooltip-content" clrPosition="left">
+                管理員密碼為必填項目
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="adminPasswordCheck">確認密碼*: </label>
+          </div>
+          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+            <label for="adminPasswordCheck" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
+              [class.invalid]="model.adminPassword != model.adminPasswordCheck">
+              <input #adminPasswordCheckInput="ngModel" required [(ngModel)]="model.adminPasswordCheck" type="password" id="adminPasswordCheck"
+                name="adminPasswordCheck" placeholder="請確認管理員密碼">
+              <span class="tooltip-content" clrPosition="left">
+                密碼不一致
+              </span>
+            </label>
+          </div>
+        </div>
 
+      </section>
+    </form>
+    <div class="alert alert-warning">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+          </div>
+          <span class="alert-text">
+            這些設定在稍後安裝結束後可進行修改。
+          </span>
+        </div>
+      </div>
+    </div>
     <ng-template clrPageButtons>
       <clr-wizard-button type="previous">上一步</clr-wizard-button>
-      <clr-wizard-button type="next">開始安裝</clr-wizard-button>
+      <clr-wizard-button type="next" [clrWizardButtonDisabled]="adminConfig.form.invalid">開始安裝</clr-wizard-button>
+
     </ng-template>
   </clr-wizard-page>
 

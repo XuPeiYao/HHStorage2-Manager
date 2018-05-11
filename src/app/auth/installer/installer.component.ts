@@ -16,7 +16,9 @@ export class InstallerComponent implements OnInit {
 
   currentIndex = 0;
 
-  model = {} as any;
+  model = {
+    adminName: "系統管理員"
+  } as any;
 
   // #region 錯誤視窗
   // 結果
