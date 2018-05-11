@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ThemeModule } from '../theme';
+import { LoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    LoadingModule,
     AppRoutingModule,
+    ThemeModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

@@ -12,7 +12,9 @@
     "typeRoots": [
       "node_modules/@types",
       "node_modules/rxjs",
-      "node_modules/@clr"
+      "node_modules/@clr",
+      "node_modules/uribuilder",
+      "node_modules/sweetalert2"
     ],
     "lib": [
       "es2017",

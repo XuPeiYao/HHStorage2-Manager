@@ -1,17 +1,30 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ClrWizard } from '@clr/angular';
-
+import { InstallService } from '../services/install.service';
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-installer',
   templateUrl: './installer.component.html',
   styleUrls: ['./installer.component.css']
 })
 export class InstallerComponent implements OnInit {
-  @ViewChild('wizard') wizard: ClrWizard;
+  @ViewChild('wizard')
+  wizard: ClrWizard;
+
+  @Input()
   open = true;
 
   currentIndex = 0;
-  constructor() { }
+
+  model = {} as any;
+
+  // #region 錯誤視窗
+  // 結果
+  databaseConnectTestResult = null;
+  showDatabaseConnectTestResult = false;
+  // #endregion
+
+  constructor(private _installService: InstallService) { }
 
   ngOnInit() {
     this.wizard.currentPageChanged.subscribe(next => {
@@ -20,8 +33,10 @@ export class InstallerComponent implements OnInit {
     });
   }
 
-  // adding a reset here for sanity's sake
-  reset(): void {
-    this.wizard.reset();
+  testDatabaseConnect() {
+    this._installService.testDbConnect(this.model).subscribe(message => {
+      this.databaseConnectTestResult = message;
+      this.showDatabaseConnectTestResult = true;
+    });
   }
 }
