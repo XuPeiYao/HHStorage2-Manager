@@ -1,3 +1,37 @@
 <router-outlet></router-outlet>
 <ngx-loading [show]="loading">
 </ngx-loading>
+
+<!-- #region 連線錯誤訊息 -->
+<clr-modal [(clrModalOpen)]="networkError">
+  <h3 class="modal-title">連線錯誤</h3>
+  <div class="modal-body">
+    <div class="card-media-block">
+      <clr-icon shape="disconnect" class="icon-error modal-icon" size="64"></clr-icon>
+      <div class="card-media-description">
+        <span class="card-media-title">
+          {{networkError?.status}} {{networkError?.statusText}}
+        </span>
+        <span class="card-media-text">
+          {{networkError?.message}}
+        </span>
+      </div>
+    </div>
+    <div class="alert alert-danger">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+          </div>
+          <span class="alert-text">
+            當出現此錯誤表示您與後端服務出現異常，請檢查後端服務是否運作中或調閱日誌。
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="networkError = null">確定</button>
+  </div>
+</clr-modal>
+<!-- #endregion -->

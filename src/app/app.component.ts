@@ -1,5 +1,6 @@
 import { HyperHttpClient } from './../theme/HyperHttpClient';
 import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -7,18 +8,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  loading = false;
+  networkError: HttpErrorResponse;
+  loadingStatus = 0;
+
+  get loading() {
+    return this.loadingStatus > 0;
+  }
+
   constructor() {
     document.title = 'HHStorage2 - 控制台';
 
     HyperHttpClient.beforeProcess.subscribe(x => {
-      this.loading = true;
+      this.loadingStatus++;
     });
     HyperHttpClient.afterProcess.subscribe(x => {
-      this.loading = false;
+      this.loadingStatus--;
     });
-    HyperHttpClient.onError.subscribe(x => {
-      this.loading = false;
+    HyperHttpClient.onError.subscribe((x: HttpErrorResponse) => {
+      this.loadingStatus--;
+      this.networkError = x;
     });
   }
 }

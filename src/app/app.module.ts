@@ -8,6 +8,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ThemeModule } from '../theme';
 import { LoadingModule } from 'ngx-loading';
+import { ClarityModule } from '@clr/angular';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LoadingModule } from 'ngx-loading';
     BrowserModule,
     BrowserAnimationsModule,
     LoadingModule,
+    ClarityModule,
     AppRoutingModule,
     ThemeModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })

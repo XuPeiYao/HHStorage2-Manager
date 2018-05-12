@@ -22,3 +22,30 @@
 .nav .nav-link:hover.nav-level-2 {
   box-shadow: inset 0 -3px 0 #bb0011;
 }
+
+/* #region icon顏色 */
+
+[shape].icon-success {
+  color: #318700
+}
+
+[shape].icon-error {
+  color: #c92100
+}
+
+[shape].icon-warning {
+  color: #c25400
+}
+
+[shape].icon-info {
+  color: #007cbb
+}
+
+/* #endregion */
+
+/* Modal中的icon */
+
+.modal-icon {
+  min-width: 64px;
+  ;
+}

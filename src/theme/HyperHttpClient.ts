@@ -26,6 +26,11 @@ export class HyperHttpClient {
    */
   public static onError = new EventEmitter<Response>();
 
+  /**
+   * 忽略onError
+   */
+  public ignoreErrorHandle = false;
+
   constructor(private _http: HttpClient) { }
 
   /**
@@ -179,13 +184,19 @@ export class HyperHttpClient {
    * @param observable RX
    */
   private boxingEvent(observable: Observable<any>) {
-    HyperHttpClient.beforeProcess.emit();
+    if (!this.ignoreErrorHandle) {
+      HyperHttpClient.beforeProcess.emit();
+    }
     return observable
       .do(() => {
-        HyperHttpClient.afterProcess.emit();
+        if (!this.ignoreErrorHandle) {
+          HyperHttpClient.afterProcess.emit();
+        }
       })
       .catch((error: any, caught: Observable<any>) => {
-        HyperHttpClient.onError.emit(error);
+        if (!this.ignoreErrorHandle) {
+          HyperHttpClient.onError.emit(error);
+        }
         return null;
       });
   }

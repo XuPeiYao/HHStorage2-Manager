@@ -1,8 +1,9 @@
+import { concat } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 import { HyperHttpClient } from '../../../theme';
 import { Observable } from 'rxjs';
-
+import { fromPromise } from 'rxjs/observable/fromPromise';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,5 +24,35 @@ export class InstallService {
    */
   public testDbConnect(connectConfig: any): Observable<string> {
     return this._http.post('api/System/dbTest', {}, connectConfig);
+  }
+
+  /**
+   * 安裝資料庫
+   * @param connectConfig 安裝參數
+   */
+  public install(connectConfig: any): Observable<any> {
+    return fromPromise(new Promise((res, rej) => {
+      this._http.ignoreErrorHandle = true;
+      res();
+    })).pipe(concat(this._http.post('api/System/install', {}, connectConfig)))
+      .do(() => {
+        this._http.ignoreErrorHandle = false;
+      });
+  }
+
+  /**
+   * 重啟服務
+   */
+  public restart(): Observable<any> {
+    return fromPromise(new Promise((res, rej) => {
+      this._http.ignoreErrorHandle = true;
+      res();
+    })).pipe(concat(this._http.delete('api/System/install/restart', {})))
+      .catch(error => {
+        return null;
+      })
+      .do(() => {
+        this._http.ignoreErrorHandle = false;
+      });
   }
 }

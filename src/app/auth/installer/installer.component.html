@@ -1,26 +1,26 @@
-<clr-wizard #wizard [(clrWizardOpen)]="open" [clrWizardClosable]="false" [clrWizardSize]="'md'" [clrWizardDisableStepnav]="true"
-  (clrWizardOnFinish)="reset()">
+<clr-wizard #wizard [(clrWizardOpen)]="open" [clrWizardClosable]="false" [clrWizardSize]="'md'" [clrWizardDisableStepnav]="true">
   <clr-wizard-title>HHStorage2 安裝</clr-wizard-title>
 
   <clr-wizard-button type="previous">上一步</clr-wizard-button>
   <clr-wizard-button type="next">下一步</clr-wizard-button>
 
   <clr-wizard-page>
-    <ng-template clrPageTitle>資料庫設定</ng-template>
+    <ng-template clrPageTitle>
+      <clr-icon shape="data-cluster" size="36"></clr-icon> 資料庫設定
+    </ng-template>
     <ng-template clrPageNavTitle>資料庫設定</ng-template>
     <form #databaseConfig="ngForm">
       <section class="form-block">
         <div class="form-group row">
-          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
             <label for="dataSource">伺服器*: </label>
           </div>
-          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <label for="dataSource" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
               [class.invalid]="dataSourceInput.invalid && (dataSourceInput.dirty || dataSourceInput.touched)">
-              <input #dataSourceInput="ngModel" required [(ngModel)]="model.dataSource" type="text" id="dataSource" name="dataSource" placeholder="請輸入伺服器名稱或域名">
-
+              <input #dataSourceInput="ngModel" required [(ngModel)]="model.dataSource" (change)="databaseConnectTestResult= ' '" type="text"
+                id="dataSource" name="dataSource" placeholder="請輸入伺服器名稱或域名">
               <span class="tooltip-content" clrPosition="left">
-
                 伺服器為必填項目
               </span>
             </label>
@@ -28,60 +28,44 @@
         </div>
 
         <div class="form-group row">
-          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
             <label for="initialCatalog">資料庫*: </label>
           </div>
-          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <label for="initialCatalog" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
               [class.invalid]="initialCatalogInput.invalid && (initialCatalogInput.dirty || initialCatalogInput.touched)">
-              <input #initialCatalogInput="ngModel" required [(ngModel)]="model.initialCatalog" type="text" id="initialCatalog" name="initialCatalog"
-                placeholder="請輸入資料庫名稱">
-
+              <input #initialCatalogInput="ngModel" required [(ngModel)]="model.initialCatalog" (change)="databaseConnectTestResult= ' '"
+                type="text" id="initialCatalog" name="initialCatalog" placeholder="請輸入資料庫名稱">
               <span class="tooltip-content" clrPosition="left">
-
                 資料庫為必填項目
               </span>
             </label>
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
             <label for="dbUserId">帳號*: </label>
           </div>
-          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <label for="dbUserId" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
               [class.invalid]="dbUserIdInput.invalid && (dbUserIdInput.dirty || dbUserIdInput.touched)">
-
-
-
-
-              <input #dbUserIdInput="ngModel" required [(ngModel)]="model.dbUserId" type="text" id="dbUserId" name="dbUserId" placeholder="請輸入資料庫使用者帳號">
-
-
-
+              <input #dbUserIdInput="ngModel" required [(ngModel)]="model.dbUserId" (change)="databaseConnectTestResult= ' '" type="text"
+                id="dbUserId" name="dbUserId" placeholder="請輸入資料庫使用者帳號">
               <span class="tooltip-content" clrPosition="left">
-
                 帳號為必填項目
               </span>
             </label>
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
             <label for="dbUserPassword">密碼*: </label>
           </div>
-          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <label for="dbUserPassword" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
               [class.invalid]="dbUserPasswordInput.invalid && (dbUserPasswordInput.dirty || dbUserPasswordInput.touched)">
-
-
-
-
-              <input #dbUserPasswordInput="ngModel" required [(ngModel)]="model.dbUserPassword" type="password" id="dbUserPassword" name="dbUserPassword"
-                placeholder="請輸入資料庫使用者密碼">
-
-
-
+              <input #dbUserPasswordInput="ngModel" required [(ngModel)]="model.dbUserPassword" (change)="databaseConnectTestResult= ' '"
+                type="password" id="dbUserPassword" name="dbUserPassword" placeholder="請輸入資料庫使用者密碼">
               <span class="tooltip-content">
                 密碼為必填項目
               </span>
@@ -109,7 +93,7 @@
             <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
           </div>
           <span class="alert-text">
-            建議您執行下一步前先執行測試連線以確保連線資訊正確。
+            執行下一步前先必須執行測試連線以確保連線資訊正確。
           </span>
         </div>
       </div>
@@ -117,20 +101,107 @@
 
     <ng-template clrPageButtons>
       <button class="btn btn-success-outline" [disabled]="databaseConfig.form.invalid" (click)="testDatabaseConnect()">測試連線</button>
-      <clr-wizard-button type="next" [clrWizardButtonDisabled]="databaseConfig.form.invalid">下一步</clr-wizard-button>
+      <clr-wizard-button type="next" [clrWizardButtonDisabled]="databaseConfig.form.invalid || databaseConnectTestResult?.length">下一步</clr-wizard-button>
     </ng-template>
   </clr-wizard-page>
 
   <clr-wizard-page>
-    <ng-template clrPageTitle>管理員帳號設定</ng-template>
+    <ng-template clrPageTitle>
+      <clr-icon shape="rack-server" size="36"></clr-icon> 伺服器參數
+    </ng-template>
+    <ng-template clrPageNavTitle>伺服器參數</ng-template>
+    <form #serverConfig="ngForm">
+      <section class="form-block">
+        <div class="form-group row">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <label for="serverName">伺服器名稱*: </label>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <label for="serverName" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
+              [class.invalid]="serverNameInput.invalid && (serverNameInput.dirty || serverNameInput.touched)">
+              <input #serverNameInput="ngModel" required [(ngModel)]="model.serverName" type="text" id="serverName" name="serverName" placeholder="請輸入伺服器名稱">
+              <span class="tooltip-content" clrPosition="left">
+                伺服器名稱為必填項目
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <label for="savePath">儲存路徑*: </label>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <label for="savePathId" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
+              [class.invalid]="savePathInput.invalid && (savePathInput.dirty || savePathInput.touched)">
+              <input #savePathInput="ngModel" required [(ngModel)]="model.savePath" type="text" id="savePath" name="savePath" placeholder="請輸入儲存路徑">
+              <span class="tooltip-content" clrPosition="left">
+                儲存路徑為必填項目
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <label for="secureKey">權杖密鑰*: </label>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <label for="secureKey" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
+              [class.invalid]="secureKeyInput.invalid && (secureKeyInput.dirty || secureKeyInput.touched)">
+              <input #secureKeyInput="ngModel" required [(ngModel)]="model.secureKey" type="password" id="secureKey" name="secureKey" placeholder="請輸入權杖密鑰">
+              <span class="tooltip-content" clrPosition="left">
+                權杖密鑰為必填項目
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <label for="secureKeyCheck">確認密鑰*: </label>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <label for="secureKeyCheck" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
+              [class.invalid]="model.secureKey != model.secureKeyCheck">
+              <input #secureKeyCheckInput="ngModel" required [(ngModel)]="model.secureKeyCheck" type="password" id="secureKeyCheck" name="secureKeyCheck"
+                placeholder="請確認權杖密鑰">
+              <span class="tooltip-content" clrPosition="left">
+                密鑰不一致
+              </span>
+            </label>
+          </div>
+        </div>
+      </section>
+    </form>
+    <div class="alert alert-warning">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+          </div>
+          <span class="alert-text">
+            這些設定在安裝後將不可修改。
+          </span>
+        </div>
+      </div>
+    </div>
+    <ng-template clrPageButtons>
+      <clr-wizard-button type="previous">上一步</clr-wizard-button>
+      <clr-wizard-button type="next" [clrWizardButtonDisabled]="serverConfig.form.invalid">下一步</clr-wizard-button>
+    </ng-template>
+  </clr-wizard-page>
+
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>
+      <clr-icon shape="administrator" size="36"></clr-icon> 管理員帳號設定
+    </ng-template>
     <ng-template clrPageNavTitle>管理員帳號設定</ng-template>
     <form #adminConfig="ngForm">
       <section class="form-block">
         <div class="form-group row">
-          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
             <label for="adminName">名稱*: </label>
           </div>
-          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <label for="adminName" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
               [class.invalid]="adminNameInput.invalid && (adminNameInput.dirty || adminNameInput.touched)">
               <input #adminNameInput="ngModel" required [(ngModel)]="model.adminName" type="text" id="adminName" name="adminName" placeholder="請輸入管理員名稱">
@@ -141,10 +212,10 @@
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
             <label for="adminId">帳號*: </label>
           </div>
-          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <label for="adminId" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
               [class.invalid]="adminIdInput.invalid && (adminIdInput.dirty || adminIdInput.touched)">
               <input #adminIdInput="ngModel" required [(ngModel)]="model.adminId" type="text" id="adminId" name="adminId" placeholder="請輸入管理員帳號">
@@ -155,10 +226,10 @@
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
             <label for="adminPassword">密碼*: </label>
           </div>
-          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <label for="adminPassword" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
               [class.invalid]="adminPasswordInput.invalid && (adminPasswordInput.dirty || adminPasswordInput.touched)">
               <input #adminPasswordInput="ngModel" required [(ngModel)]="model.adminPassword" type="password" id="adminPassword" name="adminPassword"
@@ -170,10 +241,10 @@
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
             <label for="adminPasswordCheck">確認密碼*: </label>
           </div>
-          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <label for="adminPasswordCheck" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left"
               [class.invalid]="model.adminPassword != model.adminPasswordCheck">
               <input #adminPasswordCheckInput="ngModel" required [(ngModel)]="model.adminPasswordCheck" type="password" id="adminPasswordCheck"
@@ -201,13 +272,14 @@
     </div>
     <ng-template clrPageButtons>
       <clr-wizard-button type="previous">上一步</clr-wizard-button>
-      <clr-wizard-button type="next" [clrWizardButtonDisabled]="adminConfig.form.invalid">開始安裝</clr-wizard-button>
-
+      <button class="btn btn-success-outline" [disabled]="adminConfig.form.invalid" (click)="install()">開始安裝</button>
     </ng-template>
   </clr-wizard-page>
 
   <clr-wizard-page>
-    <ng-template clrPageTitle>安裝程序</ng-template>
+    <ng-template clrPageTitle>
+      <clr-icon shape="install" size="36"></clr-icon> 安裝程序
+    </ng-template>
     <ng-template clrPageNavTitle>安裝程序</ng-template>
 
     <div class="progress loop">
@@ -219,7 +291,10 @@
   </clr-wizard-page>
 
   <clr-wizard-page>
-    <ng-template clrPageTitle>安裝完成</ng-template>
+    <ng-template clrPageTitle>
+      <clr-icon shape="check" size="36"></clr-icon> 安裝完成
+    </ng-template>
+
     <ng-template clrPageNavTitle>安裝完成</ng-template>
     HHStorage2 已經安裝成功，點擊「完成」關閉安裝視窗。
 
@@ -230,37 +305,47 @@
 </clr-wizard>
 
 
+
 <clr-modal [(clrModalOpen)]="showDatabaseConnectTestResult">
   <h3 class="modal-title">測試連線結果</h3>
-  <div class="modal-body" *ngIf="databaseConnectTestResult?.length;else databaseConnectTestSuccess">
-    <div class="alert alert-danger">
+  <div class="modal-body">
+    <div class="card-media-block" *ngIf="databaseConnectTestResult?.length;else databaseConnectTestSuccess">
+      <clr-icon shape="times" class="icon-error modal-icon" size="64"></clr-icon>
+      <div class="card-media-description">
+        <span class="card-media-title">
+          連線失敗
+        </span>
+        <span class="card-media-text">
+          {{databaseConnectTestResult}}
+        </span>
+      </div>
+    </div>
+    <div class="alert alert-warning" *ngIf="databaseConnectTestResult?.length">
       <div class="alert-items">
         <div class="alert-item static">
           <div class="alert-icon-wrapper">
-            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+            <clr-icon class="alert-icon" shape="exclamation-triangle"></clr-icon>
           </div>
           <span class="alert-text">
-            {{databaseConnectTestResult}}
+            請檢查您所輸入的資料庫連線資訊。
           </span>
         </div>
       </div>
     </div>
-  </div>
-  <ng-template #databaseConnectTestSuccess>
-    <div class="alert alert-success">
-      <div class="alert-items">
-        <div class="alert-item static">
-          <div class="alert-icon-wrapper">
-            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
-          </div>
-          <span class="alert-text">
+    <ng-template #databaseConnectTestSuccess>
+      <div class="card-media-block">
+        <clr-icon shape="check" class="icon-success modal-icon" size="64"></clr-icon>
+        <div class="card-media-description">
+          <span class="card-media-title">
             連線成功
           </span>
+          <span class="card-media-text">
+            資料庫連線測試正常。
+          </span>
         </div>
       </div>
-    </div>
-  </ng-template>
-
+    </ng-template>
+  </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="showDatabaseConnectTestResult = null">確定</button>
   </div>
