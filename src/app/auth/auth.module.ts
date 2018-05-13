@@ -7,11 +7,13 @@ import { ClarityModule } from '@clr/angular';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadingModule } from 'ngx-loading';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    LoadingModule,
     ReactiveFormsModule,
     ClarityModule,
     AuthRoutingModule

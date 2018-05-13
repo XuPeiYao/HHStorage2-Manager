@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
 
   loginInfo = {} as any;
 
+  loading = false;
+
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
@@ -45,13 +47,16 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.loading = true;
     this._loginService.getToken(this.loginInfo.id, this.loginInfo.password)
       .catch(error => {
         this.loginError = true;
+        this.loading = false;
         return null;
       })
       .subscribe(x => {
         UserStatus.token = x;
+        this.loading = false;
         this._router.navigate(['/', 'manage']);
       });
   }
