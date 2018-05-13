@@ -5,6 +5,7 @@ import { UriBuilder } from 'uribuilder';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import { UserStatus } from './user-status';
 
 /*
  * 基礎HttpService
@@ -32,6 +33,11 @@ export class HyperHttpClient {
    * 取得預設標頭
    */
   protected getDefaultHeader(): { [key: string]: string } {
+    if (UserStatus.token) {
+      return {
+        Authorization: UserStatus.token
+      };
+    }
     return {};
   }
 

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, HostBinding } from '@angular/core';
 
 @Component({
@@ -12,7 +13,18 @@ export class DashboardComponent implements OnInit {
   @HostBinding('class')
   hostClass = 'content-container';
 
-  constructor() { }
+  driveInfo: any;
+  healthInfo: any;
+
+  // CPU
+  public cpuData: number[] = [0, 100];
+
+  constructor(private _route: ActivatedRoute) {
+    this.driveInfo = _route.snapshot.data.driveInfo;
+    this.healthInfo = _route.snapshot.data.healthInfo;
+
+    this.cpuData[0] = this.healthInfo.cpu;
+  }
 
   ngOnInit() {
   }

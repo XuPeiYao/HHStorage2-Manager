@@ -1,4 +1,3 @@
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ManagerComponent } from './manager/manager.component';
@@ -10,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent
+        loadChildren: './pages/dashboard/dashboard.module#DashboardModule'
       },
       {
         path: '**',
