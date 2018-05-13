@@ -32,8 +32,8 @@
           <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <a href="..." clrDropdownItem>個人資料設定</a>
-          <a href="..." clrDropdownItem>登出</a>
+          <a clrDropdownItem>個人資料設定</a>
+          <a (click)="logout()" clrDropdownItem>登出</a>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>

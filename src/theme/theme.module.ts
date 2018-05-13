@@ -1,3 +1,4 @@
+import { BaseHttpClient } from './BaseHttpClient';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HyperHttpClient } from './HyperHttpClient';
@@ -11,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   declarations: [],
   providers: [
+    BaseHttpClient,
     HyperHttpClient
   ]
 })

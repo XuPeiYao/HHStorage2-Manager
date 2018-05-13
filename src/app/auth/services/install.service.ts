@@ -1,3 +1,4 @@
+import { BaseHttpClient } from './../../../theme/BaseHttpClient';
 import { concat } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
@@ -9,7 +10,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 })
 export class InstallService {
 
-  constructor(private _http: HyperHttpClient) { }
+  constructor(private _http: HyperHttpClient, private _baseHttp: BaseHttpClient) { }
 
   /**
    * 取得系統安裝狀態
@@ -31,28 +32,13 @@ export class InstallService {
    * @param connectConfig 安裝參數
    */
   public install(connectConfig: any): Observable<any> {
-    return fromPromise(new Promise((res, rej) => {
-      this._http.ignoreErrorHandle = true;
-      res();
-    })).pipe(concat(this._http.post('api/System/install', {}, connectConfig)))
-      .do(() => {
-        this._http.ignoreErrorHandle = false;
-      });
+    return this._baseHttp.post('api/System/install', {}, connectConfig);
   }
 
   /**
    * 重啟服務
    */
   public restart(): Observable<any> {
-    return fromPromise(new Promise((res, rej) => {
-      this._http.ignoreErrorHandle = true;
-      res();
-    })).pipe(concat(this._http.delete('api/System/install/restart', {})))
-      .catch(error => {
-        return null;
-      })
-      .do(() => {
-        this._http.ignoreErrorHandle = false;
-      });
+    return this._baseHttp.delete('api/System/install/restart', {});
   }
 }

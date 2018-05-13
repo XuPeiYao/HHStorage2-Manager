@@ -27,6 +27,7 @@ export class AppComponent {
     HyperHttpClient.onError.subscribe((x: HttpErrorResponse) => {
       this.loadingStatus--;
       this.networkError = x;
+      return x;
     });
   }
 }

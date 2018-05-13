@@ -1,22 +1,22 @@
 <div class="login-wrapper">
-  <form class="login">
+  <form class="login" #loginInfoForm="ngForm" (submit)="login()">
     <label class="title">
       <h3 class="welcome">歡迎使用</h3>
       HHStorage2 控制台
     </label>
     <div class="login-group">
-      <input class="username" type="text" id="login_username" placeholder="帳號">
-      <input class="password" type="password" id="login_password" placeholder="密碼">
-      <div class="checkbox">
-        <input type="checkbox" id="rememberme">
+      <input required class="username" type="text" id="login_username" [(ngModel)]="loginInfo.id" name="id" placeholder="帳號">
+      <input required class="password" type="password" id="login_password" [(ngModel)]="loginInfo.password" name="password" placeholder="密碼">
+      <div class="checkbox" hidden>
+        <input type="checkbox" id="rememberme" [(ngModel)]="loginInfo.rememberme" name="rememberme">
         <label for="rememberme">
-          記住登入狀態
+          記住登入狀態24小時
         </label>
       </div>
-      <div class="error active">
-        錯誤的使用者帳號或密碼
+      <div class="error active" *ngIf="loginError">
+        使用者帳號或密碼錯誤
       </div>
-      <button type="submit" class="btn btn-primary">登入</button>
+      <button type="submit" class="btn btn-primary" [disabled]="loginInfoForm.form.invalid">登入</button>
     </div>
   </form>
 </div>

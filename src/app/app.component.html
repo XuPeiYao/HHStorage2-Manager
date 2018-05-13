@@ -4,20 +4,20 @@
 
 <!-- #region 連線錯誤訊息 -->
 <clr-modal [(clrModalOpen)]="networkError">
-  <h3 class="modal-title">連線錯誤</h3>
+  <h3 class="modal-title">操作失敗</h3>
   <div class="modal-body">
     <div class="card-media-block">
       <clr-icon shape="disconnect" class="icon-error modal-icon" size="64"></clr-icon>
       <div class="card-media-description">
         <span class="card-media-title">
-          {{networkError?.status}} {{networkError?.statusText}}
+          {{networkError?.status}} {{networkError?.error?.name || networkError?.statusText}}
         </span>
         <span class="card-media-text">
-          {{networkError?.message}}
+          {{networkError?.error?.message || networkError?.message}}
         </span>
       </div>
     </div>
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" n>
       <div class="alert-items">
         <div class="alert-item static">
           <div class="alert-icon-wrapper">

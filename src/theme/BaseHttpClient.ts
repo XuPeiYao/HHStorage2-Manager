@@ -10,22 +10,7 @@ import 'rxjs/add/operator/catch';
  * 基礎HttpService
  */
 @Injectable()
-export class HyperHttpClient {
-  /**
-   * HTTP Request執行前事件
-   */
-  public static beforeProcess = new EventEmitter<void>();
-
-  /**
-   * HTTP Resposne之後事件
-   */
-  public static afterProcess = new EventEmitter<void>();
-
-  /**
-   * 當HTTP Request發生錯誤
-   */
-  public static onError = new EventEmitter<Response>();
-
+export class BaseHttpClient {
   constructor(private _http: HttpClient) { }
 
   /**
@@ -83,13 +68,11 @@ export class HyperHttpClient {
   ): Observable<T> {
     url = this.renderUrl(url, params);
 
-    return this.boxingEvent(
-      this._http.get(url, {
-        headers: this.mergeHeader(headers),
-        reportProgress: reportProgress,
-        withCredentials: withCredentials
-      })
-    );
+    return this._http.get<T>(url, {
+      headers: this.mergeHeader(headers),
+      reportProgress: reportProgress,
+      withCredentials: withCredentials
+    });
   }
 
   /**
@@ -111,13 +94,11 @@ export class HyperHttpClient {
   ): Observable<T> {
     url = this.renderUrl(url, queryOrRouteParams);
 
-    return this.boxingEvent(
-      this._http.post(url, body, {
-        headers: this.mergeHeader(headers),
-        reportProgress: reportProgress,
-        withCredentials: withCredentials
-      })
-    );
+    return this._http.post<T>(url, body, {
+      headers: this.mergeHeader(headers),
+      reportProgress: reportProgress,
+      withCredentials: withCredentials
+    });
   }
 
   /**
@@ -139,13 +120,11 @@ export class HyperHttpClient {
   ): Observable<T> {
     url = this.renderUrl(url, queryOrRouteParams);
 
-    return this.boxingEvent(
-      this._http.put(url, body, {
-        headers: this.mergeHeader(headers),
-        reportProgress: reportProgress,
-        withCredentials: withCredentials
-      })
-    );
+    return this._http.put<T>(url, body, {
+      headers: this.mergeHeader(headers),
+      reportProgress: reportProgress,
+      withCredentials: withCredentials
+    });
   }
 
   /**
@@ -165,28 +144,10 @@ export class HyperHttpClient {
   ): Observable<T> {
     url = this.renderUrl(url, params);
 
-    return this.boxingEvent(
-      this._http.delete(url, {
-        headers: this.mergeHeader(headers),
-        reportProgress: reportProgress,
-        withCredentials: withCredentials
-      })
-    );
-  }
-
-  /**
-   * 包裝事件
-   * @param observable RX
-   */
-  private boxingEvent(observable: Observable<any>) {
-    HyperHttpClient.beforeProcess.emit();
-    return observable
-      .do(() => {
-        HyperHttpClient.afterProcess.emit();
-      })
-      .catch((error: any, caught: Observable<any>) => {
-        HyperHttpClient.onError.emit(error);
-        return null;
-      });
+    return this._http.delete<T>(url, {
+      headers: this.mergeHeader(headers),
+      reportProgress: reportProgress,
+      withCredentials: withCredentials
+    });
   }
 }
