@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
    * 綁定主體元素的class屬性
    */
   @HostBinding('class')
-  hostClass = 'content-container';
+  hostClass = 'card-columns';
 
   driveInfo: any;
   healthInfo: any;

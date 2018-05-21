@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BaseHttpClient, HyperHttpClient } from '../../../../../theme';
+import { HyperHttpClient } from '@theme/HyperHttpClient';
+import { BaseHttpClient } from '@theme/BaseHttpClient';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class DashboardService {
+export class SystemInfoService {
 
   constructor(private _http: HyperHttpClient, private _baseHttp: BaseHttpClient) { }
 

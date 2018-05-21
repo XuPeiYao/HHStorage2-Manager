@@ -1,23 +1,31 @@
-import { HealthResolve } from './resolves/HealthResolve';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { DriveResolve } from './resolves/DriveResolve';
+import { DashboardNavComponent } from './dashboard-nav/dashboard-nav.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent,
-    resolve: {
-      driveInfo: DriveResolve,
-      healthInfo: HealthResolve
-    }
+    component: DashboardNavComponent,
+    children: [
+      {
+        path: 'system-info',
+        loadChildren: './pages/system-info/system-info.module#SystemInfoModule'
+      },
+      {
+        path: 'news-file',
+        loadChildren: './pages/news-file/news-file.module#NewsFileModule'
+      },
+      {
+        path: '**',
+        redirectTo: 'system-info'
+      }
+    ]
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [DriveResolve, HealthResolve]
+  providers: []
 })
 export class DashboardRoutingModule { }

@@ -12,6 +12,18 @@ const routes: Routes = [
         loadChildren: './pages/dashboard/dashboard.module#DashboardModule'
       },
       {
+        path: 'storage',
+        loadChildren: './pages/storage/storage.module#StorageModule'
+      },
+      {
+        path: 'users',
+        loadChildren: './pages/users/users.module#UsersModule'
+      },
+      {
+        path: 'system',
+        loadChildren: './pages/system/system.module#SystemModule'
+      },
+      {
         path: '**',
         redirectTo: 'dashboard'
       }
